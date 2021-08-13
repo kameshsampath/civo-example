@@ -2,7 +2,9 @@ provider "civo" {
   token = var.api_token
 }
 
-# comment this to make it work 
+# uncomment this to make this and command module block
+# see terrform init go through 
+
 # data "civo_kubernetes_version" "stable" {
 #   filter {
 #     key    = "type"
