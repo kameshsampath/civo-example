@@ -35,5 +35,7 @@ module "k3s" {
   gloo_num_nodes         = each.value.num_nodes
   gloo_target_nodes_size = each.value.target_nodes_size
   gloo_role              = each.value.role
-  applications           = each.value.apps
+  # applications           = each.value.apps
+  gloo_apps              = []
+  gloo_clusterz          = var.gloo_clusters
 }

@@ -1,3 +1,8 @@
+variable "gloo_clusterz" {
+  type        = map(any)
+  description = "Gloo Clusters"
+}
+
 variable gloo_name {
   type        = string
   description = "description"
@@ -37,13 +42,13 @@ data "civo_kubernetes_version" "stable" {
 }
 
 resource "civo_kubernetes_cluster" "gloo" {
-  for_each = var.gloo_clusters
+  for_each = var.gloo_clusterz
 
   name               = "gloo-${var.gloo_name}"
-  region             = gloo_region
-  num_target_nodes   = gloo_num_nodes
-  target_nodes_size  = gloo_target_nodes_size
-  tags               = join(",", ["gloo",gloo_role])
-  applications       = join(",", gloo_apps)
+  region             = var.gloo_region
+  num_target_nodes   = var.gloo_num_nodes
+  target_nodes_size  = var.gloo_target_nodes_size
+  tags               = join(",", ["gloo",var.gloo_role])
+  applications       = join(",", var.gloo_apps)
   kubernetes_version = element(data.civo_kubernetes_version.stable.versions, 0).version
 }
